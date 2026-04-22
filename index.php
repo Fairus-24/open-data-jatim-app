@@ -225,10 +225,18 @@
         Chart.defaults.font.family = 'Inter';
 
         async function fetchJatimData() {
+            // Setup timeout control (5 seconds)
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
+
             try {
                 // Fetch directly from the CORRECT Jatimprov API Endpoint
-                const response = await fetch('https://opendata.jatimprov.go.id/api/datasets');
+                const response = await fetch('https://opendata.jatimprov.go.id/api/datasets', {
+                    signal: controller.signal
+                });
                 
+                clearTimeout(timeoutId);
+
                 if (!response.ok) {
                     throw new Error(`HTTP Error: ${response.status}`);
                 }
@@ -250,14 +258,104 @@
                     throw new Error('API merespon tapi struktur JSON tidak sesuai');
                 }
             } catch (error) {
+                clearTimeout(timeoutId);
+                console.warn("API Gagal, beralih ke Mock Data:", error);
+                
+                let errMessage = error.name === 'AbortError' ? 'Koneksi Timeout (Server lambat)' : error.message;
+
                 document.getElementById('loadingOverlay').style.display = 'none';
                 document.getElementById('errorAlert').style.display = 'block';
-                document.getElementById('errorMsg').innerText = error.message + " (Gagal memuat data dari API Jatimprov)";
+                document.getElementById('errorMsg').innerHTML = errMessage + " <br><br><b>INFO:</b> Menggunakan Data Simulasi Lokal (Offline Mode).";
                 
                 document.getElementById('apiBadgeStatus').style.background = '#ef4444';
                 document.getElementById('apiDotStatus').style.background = '#ef4444';
-                document.getElementById('apiTextStatus').innerText = 'Koneksi Gagal';
+                document.getElementById('apiTextStatus').innerText = 'Koneksi Gagal (Offline)';
+
+                // Fallback to local mock data
+                loadMockData();
             }
+        }
+
+        async function loadMockData() {
+            try {
+                const response = await fetch('mock_data.json');
+                const mock = await response.json();
+                document.getElementById('mainDashboard').style.display = 'grid';
+                renderMockDashboard(mock.data);
+            } catch (e) {
+                document.getElementById('errorMsg').innerHTML += "<br>Gagal memuat mock_data.json lokal.";
+            }
+        }
+
+        function renderMockDashboard(data) {
+            // Metrics
+            document.getElementById('valTotalDatasets').innerText = "25.4K"; // Simulated
+            document.getElementById('valTopFormat').innerText = "CSV";
+            
+            // Table
+            let tableHtml = '';
+            data.datasets.forEach(ds => {
+                tableHtml += `
+                    <tr class="dataset-row">
+                        <td class="ds-name" style="color: #e2e8f0; font-weight: 500;">${escapeHtml(ds.name)}</td>
+                        <td>${escapeHtml(ds.source)}</td>
+                        <td>${escapeHtml(ds.date)}</td>
+                        <td><span class="status-badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">${escapeHtml(ds.status)}</span></td>
+                        <td><a href="#" style="color: #60a5fa; text-decoration: none;">View Data</a></td>
+                    </tr>
+                `;
+            });
+            document.getElementById('tableBody').innerHTML = tableHtml;
+
+            // Charts
+            new Chart(document.getElementById('populationChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        data: data.population.chart_data,
+                        backgroundColor: function(context) {
+                            const ctx = context.chart.ctx;
+                            const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+                            gradient.addColorStop(0, '#60a5fa');
+                            gradient.addColorStop(1, '#8b5cf6');
+                            return gradient;
+                        },
+                        borderRadius: 4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } } } }
+            });
+
+            // Doughnut
+            new Chart(document.getElementById('educationChart'), {
+                type: 'doughnut',
+                data: { labels: ['CSV', 'JSON', 'PDF', 'XLSX'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: ['#60a5fa', '#8b5cf6', '#06b6d4', '#3b82f6'], borderWidth: 0, cutout: '70%' }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+            document.getElementById('eduLegend').innerHTML = ['CSV', 'JSON', 'PDF', 'XLSX'].map((label, i) => `
+                <div class="legend-item"><span class="legend-color" style="background:${['#60a5fa', '#8b5cf6', '#06b6d4', '#3b82f6'][i]}"></span><span>${label}</span></div>
+            `).join('');
+
+            // Line Chart
+            new Chart(document.getElementById('economyChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Now'],
+                    datasets: [{
+                        data: data.economy.chart_data,
+                        borderColor: '#06b6d4', borderWidth: 3, tension: 0.4, fill: true,
+                        backgroundColor: function(context) {
+                            const ctx = context.chart.ctx;
+                            const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+                            gradient.addColorStop(0, 'rgba(6, 182, 212, 0.5)');
+                            gradient.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
+                            return gradient;
+                        }
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } } } }
+            });
         }
 
         function renderDashboard(result) {
