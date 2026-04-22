@@ -1,66 +1,77 @@
 {
     "success": true,
     "message": "Data berhasil diambil secara lokal (Mock API)",
-    "data": [
-        {
-            "id": 1,
-            "kategori": "Kependudukan",
-            "judul": "Jumlah Penduduk Jawa Timur",
-            "deskripsi": "Data total penduduk Jawa Timur berdasarkan sensus terakhir.",
-            "nilai": "41.144.067",
-            "satuan": "Jiwa",
-            "sumber": "BPS Provinsi Jawa Timur",
-            "tahun": 2023
+    "data": {
+        "population": {
+            "title": "POPULATION OVERVIEW",
+            "value": "41.1M",
+            "subtitle": "Population",
+            "growth": "+3.2%",
+            "label": "JATIM CITIZENS",
+            "chart_labels": ["1990", "2000", "2010", "2015", "2020", "2022", "2023"],
+            "chart_data": [2.5, 3.8, 4.8, 6.8, 8.8, 9.5, 10.0]
         },
-        {
-            "id": 2,
-            "kategori": "Pendidikan",
-            "judul": "Angka Melek Huruf (Usia 15+)",
-            "deskripsi": "Persentase penduduk usia 15 tahun ke atas yang dapat membaca dan menulis.",
-            "nilai": "93.45",
-            "satuan": "%",
-            "sumber": "BPS Provinsi Jawa Timur",
-            "tahun": 2023
+        "education": {
+            "title": "EDUCATION LEVELS",
+            "value": "92.1%",
+            "subtitle": "Literacy",
+            "growth": "+0.8%",
+            "label": "LITERACY RATE",
+            "chart_data": [40, 35, 17, 8],
+            "chart_labels": ["Basic (40%)", "Secondary (35%)", "Higher (17%)", "Primary (8%)"]
         },
-        {
-            "id": 3,
-            "kategori": "Ekonomi",
-            "judul": "Pertumbuhan Ekonomi",
-            "deskripsi": "Laju pertumbuhan ekonomi Provinsi Jawa Timur.",
-            "nilai": "4.95",
-            "satuan": "%",
-            "sumber": "Bappeda Jawa Timur",
-            "tahun": 2023
+        "economy": {
+            "title": "ECONOMIC INDICATORS",
+            "value": "Rp 2.9T",
+            "subtitle": "PDRB",
+            "growth": "+4.1%",
+            "label": "JATIM PDRB (IDR)",
+            "chart_labels": ["2010", "2012", "2015", "2018", "2020", "2022", "2023"],
+            "chart_data": [20, 30, 40, 60, 50, 80, 98.2]
         },
-        {
-            "id": 4,
-            "kategori": "Kesehatan",
-            "judul": "Angka Harapan Hidup",
-            "deskripsi": "Rata-rata perkiraan banyak tahun yang dapat ditempuh oleh seseorang selama hidup.",
-            "nilai": "74.87",
-            "satuan": "Tahun",
-            "sumber": "Dinas Kesehatan Jawa Timur",
-            "tahun": 2023
+        "demographics": {
+            "title": "REGIONAL DEMOGRAPHICS",
+            "subtitle": "POPULATION BY REGION",
+            "chart_labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "chart_data": [10, 15, 20, 25, 40, 30, 20, 35, 25, 15, 10, 5]
         },
-        {
-            "id": 5,
-            "kategori": "Ketenagakerjaan",
-            "judul": "Tingkat Pengangguran Terbuka (TPT)",
-            "deskripsi": "Persentase jumlah pengangguran terhadap jumlah angkatan kerja.",
-            "nilai": "4.88",
-            "satuan": "%",
-            "sumber": "BPS Provinsi Jawa Timur",
-            "tahun": 2023
-        },
-        {
-            "id": 6,
-            "kategori": "Pariwisata",
-            "judul": "Jumlah Kunjungan Wisatawan Mancanegara",
-            "deskripsi": "Total kunjungan wisman melalui pintu masuk Jawa Timur.",
-            "nilai": "153.210",
-            "satuan": "Kunjungan",
-            "sumber": "Dinas Kebudayaan dan Pariwisata Jatim",
-            "tahun": 2023
-        }
-    ]
+        "datasets": [
+            {
+                "name": "Data Kemiskinan Jatim",
+                "source": "BPS",
+                "date": "23/12/2023",
+                "status": "Active"
+            },
+            {
+                "name": "Lalu Lintas Surabaya",
+                "source": "Dishub",
+                "date": "13/12/2023",
+                "status": "Active"
+            },
+            {
+                "name": "Kapasitas Energi Terbarukan",
+                "source": "ESDM",
+                "date": "15/12/2023",
+                "status": "Active"
+            },
+            {
+                "name": "Fasilitas Kesehatan Publik",
+                "source": "Dinkes",
+                "date": "15/12/2023",
+                "status": "Active"
+            },
+            {
+                "name": "Populasi Hewan Ternak",
+                "source": "Disnak",
+                "date": "13/12/2023",
+                "status": "Active"
+            },
+            {
+                "name": "Indeks Harga Konsumen",
+                "source": "BPS",
+                "date": "10/12/2023",
+                "status": "Active"
+            }
+        ]
+    }
 }
