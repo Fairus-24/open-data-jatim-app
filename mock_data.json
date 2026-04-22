@@ -1,0 +1,66 @@
+{
+    "success": true,
+    "message": "Data berhasil diambil secara lokal (Mock API)",
+    "data": [
+        {
+            "id": 1,
+            "kategori": "Kependudukan",
+            "judul": "Jumlah Penduduk Jawa Timur",
+            "deskripsi": "Data total penduduk Jawa Timur berdasarkan sensus terakhir.",
+            "nilai": "41.144.067",
+            "satuan": "Jiwa",
+            "sumber": "BPS Provinsi Jawa Timur",
+            "tahun": 2023
+        },
+        {
+            "id": 2,
+            "kategori": "Pendidikan",
+            "judul": "Angka Melek Huruf (Usia 15+)",
+            "deskripsi": "Persentase penduduk usia 15 tahun ke atas yang dapat membaca dan menulis.",
+            "nilai": "93.45",
+            "satuan": "%",
+            "sumber": "BPS Provinsi Jawa Timur",
+            "tahun": 2023
+        },
+        {
+            "id": 3,
+            "kategori": "Ekonomi",
+            "judul": "Pertumbuhan Ekonomi",
+            "deskripsi": "Laju pertumbuhan ekonomi Provinsi Jawa Timur.",
+            "nilai": "4.95",
+            "satuan": "%",
+            "sumber": "Bappeda Jawa Timur",
+            "tahun": 2023
+        },
+        {
+            "id": 4,
+            "kategori": "Kesehatan",
+            "judul": "Angka Harapan Hidup",
+            "deskripsi": "Rata-rata perkiraan banyak tahun yang dapat ditempuh oleh seseorang selama hidup.",
+            "nilai": "74.87",
+            "satuan": "Tahun",
+            "sumber": "Dinas Kesehatan Jawa Timur",
+            "tahun": 2023
+        },
+        {
+            "id": 5,
+            "kategori": "Ketenagakerjaan",
+            "judul": "Tingkat Pengangguran Terbuka (TPT)",
+            "deskripsi": "Persentase jumlah pengangguran terhadap jumlah angkatan kerja.",
+            "nilai": "4.88",
+            "satuan": "%",
+            "sumber": "BPS Provinsi Jawa Timur",
+            "tahun": 2023
+        },
+        {
+            "id": 6,
+            "kategori": "Pariwisata",
+            "judul": "Jumlah Kunjungan Wisatawan Mancanegara",
+            "deskripsi": "Total kunjungan wisman melalui pintu masuk Jawa Timur.",
+            "nilai": "153.210",
+            "satuan": "Kunjungan",
+            "sumber": "Dinas Kebudayaan dan Pariwisata Jatim",
+            "tahun": 2023
+        }
+    ]
+}
