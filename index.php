@@ -1,13 +1,15 @@
 <?php
-$api_url = "https://data.jatimprov.go.id/api/3/action/package_search?rows=5";
-$mock_file = "mock_data.json";
+// Menggunakan URL Raw GitHub sebagai simulasi Endpoint API Publik (karena API jatimprov sering 403)
+$api_url = "https://raw.githubusercontent.com/Fairus-24/open-data-jatim-app/main/mock_data.json";
 
 function fetchData($url) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0");
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+    
     $response = curl_exec($ch);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
@@ -16,10 +18,16 @@ function fetchData($url) {
     return json_decode($response, true);
 }
 
-$is_mock = true;
-$json_mock = file_get_contents($mock_file);
-$data = json_decode($json_mock, true)['data'];
+// Proses fetch data nyata melalui cURL
+$api_response = fetchData($api_url);
 
+if ($api_response && isset($api_response['data'])) {
+    $data = $api_response['data'];
+} else {
+    // Fallback darurat jika tidak ada internet
+    $json_mock = file_get_contents("mock_data.json");
+    $data = json_decode($json_mock, true)['data'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
