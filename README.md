@@ -12,7 +12,7 @@ Aplikasi PHP modern untuk mengeksplorasi data dari API portal Open Data Provinsi
 Aplikasi ini dapat dijalankan dengan server PHP apa saja (seperti XAMPP, Laragon, dll.) atau menggunakan server bawaan (Built-in Web Server) dari PHP.
 
 1. Buka terminal atau Command Prompt.
-2. Arahkan ke direktori proyek (`cd "d:\Open Data Jatim"`).
+2. Arahkan ke direktori proyek (`cd "Open Data Jatim"`).
 3. Jalankan perintah berikut:
    ```bash
    php -S localhost:8000
