@@ -1,0 +1,78 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "name": "Jumlah Bangunan SMP Sederajat Berdasarkan Kondisi Bangunan",
+      "slug": "3526-jumlah-bangunan-smp-sederajat-berdasarkan-kondisi-bangunan",
+      "topik_name": "Pendidikan",
+      "organisasi_name": "Kabupaten Bangkalan",
+      "mdate": "2024-12-12T19:38:27+00:00"
+    },
+    {
+      "name": "Jumlah Bayi Berdasarkan Berat Badan Lahir Rendah (BBLR) Menurut Kecamatan",
+      "slug": "3526-jumlah-bayi-berdasarkan-berat-badan-lahir-rendah-bblr-menurut-kecamatan",
+      "topik_name": "Kesehatan",
+      "organisasi_name": "Kabupaten Bangkalan",
+      "mdate": "2024-12-12T19:38:27+00:00"
+    },
+    {
+      "name": "Jumlah Belanja Langsung",
+      "slug": "3526-jumlah-belanja-langsung",
+      "topik_name": "Sosial",
+      "organisasi_name": "Kabupaten Bangkalan",
+      "mdate": "2024-12-12T19:38:28+00:00"
+    },
+    {
+      "name": "Jumlah Belanja Tidak Langsung",
+      "slug": "3526-jumlah-belanja-tidak-langsung",
+      "topik_name": "Sosial",
+      "organisasi_name": "Kabupaten Bangkalan",
+      "mdate": "2024-12-12T19:38:28+00:00"
+    },
+    {
+      "name": "Jumlah Benih Ikan",
+      "slug": "3526-jumlah-benih-ikan",
+      "topik_name": "Sosial",
+      "organisasi_name": "Kabupaten Bangkalan",
+      "mdate": "2024-12-12T19:38:28+00:00"
+    },
+    {
+      "name": "Capaian Indikator Kinerja Utama (IKU) RSUD Dr. Soetomo",
+      "slug": "rsud-soetomo-capaian-iku",
+      "topik_name": "Kesehatan",
+      "organisasi_name": "RSUD Dr. Soetomo",
+      "mdate": "2024-11-20T10:15:00+00:00"
+    },
+    {
+      "name": "Data Pertumbuhan Ekonomi Jawa Timur",
+      "slug": "pertumbuhan-ekonomi-jatim",
+      "topik_name": "Ekonomi",
+      "organisasi_name": "BPS Provinsi Jawa Timur",
+      "mdate": "2024-11-15T08:30:00+00:00"
+    },
+    {
+      "name": "Jumlah Produksi Padi Menurut Kabupaten/Kota",
+      "slug": "produksi-padi-jatim",
+      "topik_name": "Pertanian",
+      "organisasi_name": "Dinas Pertanian Jawa Timur",
+      "mdate": "2024-10-05T14:22:00+00:00"
+    },
+    {
+      "name": "Data Kunjungan Wisatawan Mancanegara",
+      "slug": "kunjungan-wisman-jatim",
+      "topik_name": "Pariwisata",
+      "organisasi_name": "Dinas Kebudayaan dan Pariwisata",
+      "mdate": "2024-09-30T09:10:00+00:00"
+    },
+    {
+      "name": "Indeks Pembangunan Manusia (IPM) Jawa Timur",
+      "slug": "ipm-jatim",
+      "topik_name": "Pendidikan",
+      "organisasi_name": "Bappeda Jawa Timur",
+      "mdate": "2024-08-20T11:45:00+00:00"
+    }
+  ],
+  "pagination": {
+    "total_data": 40227
+  }
+}
