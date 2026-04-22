@@ -47,22 +47,22 @@ if ($api_response && isset($api_response['data'])) {
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
             </div>
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">
+                <a href="#" class="nav-item active" data-target="view-dashboard" title="Dashboard">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="#" class="nav-item" data-target="view-database" title="Database">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="#" class="nav-item" data-target="view-charts" title="Analytics">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="#" class="nav-item" data-target="view-documents" title="Documents">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="#" class="nav-item" data-target="view-api" title="API Reference">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="#" class="nav-item" data-target="view-settings" title="Settings">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 </a>
             </nav>
@@ -78,13 +78,26 @@ if ($api_response && isset($api_response['data'])) {
                 <div class="header-right">
                     <div class="search-box">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        <input type="text" placeholder="Search Datasets...">
+                        <input type="text" id="searchInput" placeholder="Search Datasets...">
                     </div>
-                    <div class="notification">
+                    
+                    <div class="notification" id="notifButton">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                         <span class="badge"></span>
+                        
+                        <!-- Notification Dropdown -->
+                        <div class="dropdown-menu" id="notifDropdown">
+                            <div class="dropdown-header">Notifications</div>
+                            <div class="dropdown-item">
+                                <div class="dot green"></div> Data sinkronisasi berhasil.
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dot blue"></div> API koneksi stabil.
+                            </div>
+                        </div>
                     </div>
-                    <div class="user-profile">
+
+                    <div class="user-profile" id="profileButton">
                         <div class="avatar">
                             <img src="https://i.pravatar.cc/150?img=33" alt="User">
                         </div>
@@ -92,133 +105,265 @@ if ($api_response && isset($api_response['data'])) {
                             <div class="name">Mark S. <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
                             <div class="role">Admin</div>
                         </div>
+                        
+                        <!-- Profile Dropdown -->
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="dropdown-item" onclick="alert('Membuka halaman profil...')">My Profile</div>
+                            <div class="dropdown-item" onclick="alert('Membuka pengaturan akun...')">Account Settings</div>
+                            <hr style="border-color: rgba(255,255,255,0.05); margin: 5px 0;">
+                            <div class="dropdown-item" style="color: #ef4444;" onclick="alert('Berhasil Logout!')">Logout</div>
+                        </div>
                     </div>
                 </div>
             </header>
 
-            <div class="page-title">
-                <h1>Key Jatim Statistics</h1>
+            <!-- Dashboard View (Active) -->
+            <div id="view-dashboard" class="view-section active">
+                <div class="page-title">
+                    <h1>Key Jatim Statistics</h1>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    
+                    <!-- Card 1: Population -->
+                    <div class="card card-glow-blue">
+                        <div class="card-header">
+                            <h2><?= $data['population']['title'] ?></h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <div class="card-value-row">
+                            <div class="main-value">
+                                <span class="number"><?= explode(' ', $data['population']['value'])[0] ?></span>
+                                <span class="text"><?= $data['population']['subtitle'] ?></span>
+                            </div>
+                            <div class="growth positive"><?= $data['population']['growth'] ?></div>
+                        </div>
+                        <div class="card-label"><?= $data['population']['label'] ?></div>
+                        <div class="chart-container">
+                            <canvas id="populationChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Education -->
+                    <div class="card card-glow-cyan">
+                        <div class="card-header">
+                            <h2><?= $data['education']['title'] ?></h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        </div>
+                        <div class="card-value-row">
+                            <div class="main-value">
+                                <span class="number"><?= explode(' ', $data['education']['value'])[0] ?></span>
+                                <span class="text"><?= $data['education']['subtitle'] ?></span>
+                            </div>
+                            <div class="growth positive"><?= $data['education']['growth'] ?></div>
+                        </div>
+                        <div class="card-label"><?= $data['education']['label'] ?></div>
+                        <div class="chart-container row-chart">
+                            <div class="doughnut-wrapper">
+                                <canvas id="educationChart"></canvas>
+                            </div>
+                            <div class="chart-legend" id="eduLegend"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Economy -->
+                    <div class="card card-glow-purple">
+                        <div class="card-header">
+                            <h2><?= $data['economy']['title'] ?></h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        </div>
+                        <div class="card-value-row">
+                            <div class="main-value">
+                                <span class="number"><?= explode(' ', $data['economy']['value'])[0] . ' ' . explode(' ', $data['economy']['value'])[1] ?></span>
+                                <span class="text"><?= $data['economy']['subtitle'] ?></span>
+                            </div>
+                            <div class="growth positive"><?= $data['economy']['growth'] ?></div>
+                        </div>
+                        <div class="card-label"><?= $data['economy']['label'] ?></div>
+                        <div class="chart-container">
+                            <canvas id="economyChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Map/Demographics -->
+                    <div class="card card-glow-blue span-2">
+                        <div class="card-header">
+                            <h2><?= $data['demographics']['title'] ?></h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        </div>
+                        <div class="card-label"><?= $data['demographics']['subtitle'] ?></div>
+                        <div class="map-container">
+                            <!-- Simulated map using background -->
+                            <div class="world-map">
+                                <div class="glow-dot" style="top: 40%; left: 30%; width: 20px; height: 20px;"></div>
+                                <div class="glow-dot" style="top: 55%; left: 70%; width: 40px; height: 40px; background: #8b5cf6; box-shadow: 0 0 20px #8b5cf6;"></div>
+                                <div class="glow-dot" style="top: 60%; left: 65%; width: 15px; height: 15px;"></div>
+                                <div class="glow-dot" style="top: 45%; left: 50%; width: 25px; height: 25px; background: #06b6d4; box-shadow: 0 0 20px #06b6d4;"></div>
+                            </div>
+                        </div>
+                        <div class="chart-container small-chart">
+                            <canvas id="demographicsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Datasets Table -->
+                    <div class="card card-glow-blue span-2">
+                        <div class="card-header">
+                            <h2>RECENT OPEN DATASETS</h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                        </div>
+                        <div class="table-container">
+                            <table id="datasetsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Dataset Name</th>
+                                        <th>Source</th>
+                                        <th>Date Updated</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($data['datasets'] as $ds): ?>
+                                    <tr class="dataset-row">
+                                        <td class="ds-name"><?= $ds['name'] ?></td>
+                                        <td><?= $ds['source'] ?></td>
+                                        <td><?= $ds['date'] ?></td>
+                                        <td><span class="status-badge"><?= $ds['status'] ?></span></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <div id="noResults" style="display: none; text-align: center; color: #64748b; padding: 20px;">Dataset tidak ditemukan.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Dashboard Grid -->
-            <div class="dashboard-grid">
-                
-                <!-- Card 1: Population -->
-                <div class="card card-glow-blue">
-                    <div class="card-header">
-                        <h2><?= $data['population']['title'] ?></h2>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    </div>
-                    <div class="card-value-row">
-                        <div class="main-value">
-                            <span class="number"><?= explode(' ', $data['population']['value'])[0] ?></span>
-                            <span class="text"><?= $data['population']['subtitle'] ?></span>
-                        </div>
-                        <div class="growth positive"><?= $data['population']['growth'] ?></div>
-                    </div>
-                    <div class="card-label"><?= $data['population']['label'] ?></div>
-                    <div class="chart-container">
-                        <canvas id="populationChart"></canvas>
-                    </div>
+            <!-- Other Views (Hidden by default) -->
+            <div id="view-database" class="view-section">
+                <div class="page-title"><h1>Database Architecture</h1></div>
+                <div class="card card-glow-purple" style="padding: 50px; text-align: center;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--glow-purple)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                    <h2 style="margin: 20px 0; color: white;">Database Module</h2>
+                    <p style="color: var(--text-muted)">This module is currently under development. Here you will be able to manage database connections and schemas.</p>
                 </div>
-
-                <!-- Card 2: Education -->
-                <div class="card card-glow-cyan">
-                    <div class="card-header">
-                        <h2><?= $data['education']['title'] ?></h2>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                    </div>
-                    <div class="card-value-row">
-                        <div class="main-value">
-                            <span class="number"><?= explode(' ', $data['education']['value'])[0] ?></span>
-                            <span class="text"><?= $data['education']['subtitle'] ?></span>
-                        </div>
-                        <div class="growth positive"><?= $data['education']['growth'] ?></div>
-                    </div>
-                    <div class="card-label"><?= $data['education']['label'] ?></div>
-                    <div class="chart-container row-chart">
-                        <div class="doughnut-wrapper">
-                            <canvas id="educationChart"></canvas>
-                        </div>
-                        <div class="chart-legend" id="eduLegend"></div>
-                    </div>
-                </div>
-
-                <!-- Card 3: Economy -->
-                <div class="card card-glow-purple">
-                    <div class="card-header">
-                        <h2><?= $data['economy']['title'] ?></h2>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                    </div>
-                    <div class="card-value-row">
-                        <div class="main-value">
-                            <span class="number"><?= explode(' ', $data['economy']['value'])[0] . ' ' . explode(' ', $data['economy']['value'])[1] ?></span>
-                            <span class="text"><?= $data['economy']['subtitle'] ?></span>
-                        </div>
-                        <div class="growth positive"><?= $data['economy']['growth'] ?></div>
-                    </div>
-                    <div class="card-label"><?= $data['economy']['label'] ?></div>
-                    <div class="chart-container">
-                        <canvas id="economyChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Card 4: Map/Demographics -->
-                <div class="card card-glow-blue span-2">
-                    <div class="card-header">
-                        <h2><?= $data['demographics']['title'] ?></h2>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-                    </div>
-                    <div class="card-label"><?= $data['demographics']['subtitle'] ?></div>
-                    <div class="map-container">
-                        <!-- Simulated map using background -->
-                        <div class="world-map">
-                            <div class="glow-dot" style="top: 40%; left: 30%; width: 20px; height: 20px;"></div>
-                            <div class="glow-dot" style="top: 55%; left: 70%; width: 40px; height: 40px; background: #8b5cf6; box-shadow: 0 0 20px #8b5cf6;"></div>
-                            <div class="glow-dot" style="top: 60%; left: 65%; width: 15px; height: 15px;"></div>
-                            <div class="glow-dot" style="top: 45%; left: 50%; width: 25px; height: 25px; background: #06b6d4; box-shadow: 0 0 20px #06b6d4;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container small-chart">
-                        <canvas id="demographicsChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Card 5: Datasets Table -->
-                <div class="card card-glow-blue span-2">
-                    <div class="card-header">
-                        <h2>RECENT OPEN DATASETS</h2>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                    </div>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Dataset Name</th>
-                                    <th>Source</th>
-                                    <th>Date Updated</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($data['datasets'] as $ds): ?>
-                                <tr>
-                                    <td class="ds-name"><?= $ds['name'] ?></td>
-                                    <td><?= $ds['source'] ?></td>
-                                    <td><?= $ds['date'] ?></td>
-                                    <td><span class="status-badge"><?= $ds['status'] ?></span></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
             </div>
+
+            <div id="view-charts" class="view-section">
+                <div class="page-title"><h1>Advanced Analytics</h1></div>
+                <div class="card card-glow-cyan" style="padding: 50px; text-align: center;">
+                    <h2 style="margin: 20px 0; color: white;">Analytics Engine</h2>
+                    <p style="color: var(--text-muted)">Custom report builder and machine learning analytics will be available here.</p>
+                </div>
+            </div>
+
+            <div id="view-documents" class="view-section">
+                <div class="page-title"><h1>Documentation</h1></div>
+                <div class="card card-glow-blue" style="padding: 50px; text-align: center;">
+                    <h2 style="margin: 20px 0; color: white;">Data Dictionary</h2>
+                    <p style="color: var(--text-muted)">Access all API documentation and data dictionaries in this section.</p>
+                </div>
+            </div>
+
+            <div id="view-api" class="view-section">
+                <div class="page-title"><h1>API Reference</h1></div>
+                <div class="card card-glow-purple" style="padding: 50px; text-align: center;">
+                    <h2 style="margin: 20px 0; color: white;">API Keys & Tokens</h2>
+                    <p style="color: var(--text-muted)">Manage your application tokens and view API usage limits.</p>
+                </div>
+            </div>
+
+            <div id="view-settings" class="view-section">
+                <div class="page-title"><h1>System Settings</h1></div>
+                <div class="card card-glow-cyan" style="padding: 50px; text-align: center;">
+                    <h2 style="margin: 20px 0; color: white;">Global Configuration</h2>
+                    <p style="color: var(--text-muted)">System preferences, user roles, and security settings.</p>
+                </div>
+            </div>
+
         </main>
     </div>
 
     <script>
+        // === INTERACTIVE UI LOGIC ===
+
+        // 1. Sidebar Tab Switching
+        const navItems = document.querySelectorAll('.nav-item');
+        const viewSections = document.querySelectorAll('.view-section');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Remove active class from all
+                navItems.forEach(nav => nav.classList.remove('active'));
+                viewSections.forEach(view => view.classList.remove('active'));
+                
+                // Add active to clicked
+                this.classList.add('active');
+                
+                // Show corresponding view
+                const targetId = this.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // 2. Dropdown Menus (Notification & Profile)
+        const notifBtn = document.getElementById('notifButton');
+        const notifDrop = document.getElementById('notifDropdown');
+        const profileBtn = document.getElementById('profileButton');
+        const profileDrop = document.getElementById('profileDropdown');
+
+        function toggleDropdown(e, dropdown) {
+            e.stopPropagation();
+            // Close the other one
+            if (dropdown === notifDrop) profileDrop.classList.remove('show');
+            if (dropdown === profileDrop) notifDrop.classList.remove('show');
+            
+            dropdown.classList.toggle('show');
+        }
+
+        notifBtn.addEventListener('click', (e) => toggleDropdown(e, notifDrop));
+        profileBtn.addEventListener('click', (e) => toggleDropdown(e, profileDrop));
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            notifDrop.classList.remove('show');
+            profileDrop.classList.remove('show');
+        });
+
+        // Prevent closing when clicking inside the dropdown itself
+        notifDrop.addEventListener('click', (e) => e.stopPropagation());
+        profileDrop.addEventListener('click', (e) => e.stopPropagation());
+
+        // 3. Search Box Filter
+        const searchInput = document.getElementById('searchInput');
+        const datasetRows = document.querySelectorAll('.dataset-row');
+        const noResultsMsg = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            let hasVisibleRow = false;
+
+            // Only filter the table if we are on the dashboard view
+            if (document.getElementById('view-dashboard').classList.contains('active')) {
+                datasetRows.forEach(row => {
+                    const datasetName = row.querySelector('.ds-name').textContent.toLowerCase();
+                    const sourceName = row.children[1].textContent.toLowerCase();
+                    
+                    if (datasetName.includes(query) || sourceName.includes(query)) {
+                        row.style.display = '';
+                        hasVisibleRow = true;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                noResultsMsg.style.display = hasVisibleRow ? 'none' : 'block';
+            }
+        });
+
+        // === CHART.JS RENDER LOGIC ===
         Chart.defaults.color = '#64748b';
         Chart.defaults.font.family = 'Inter';
 

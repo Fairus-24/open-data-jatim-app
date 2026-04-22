@@ -135,12 +135,14 @@ body {
     color: var(--text-main);
     margin-left: 10px;
     outline: none;
+    width: 200px;
 }
 
 .notification {
     position: relative;
     color: var(--text-muted);
     cursor: pointer;
+    padding: 5px;
 }
 
 .notification .badge {
@@ -159,6 +161,8 @@ body {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    position: relative;
+    padding: 5px;
 }
 
 .avatar img {
@@ -178,6 +182,83 @@ body {
 .user-info .role {
     font-size: 0.75rem;
     color: var(--text-muted);
+}
+
+/* Dropdowns */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background: #1e293b;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 250px;
+    padding: 10px 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-dropdown {
+    width: 200px;
+}
+
+.dropdown-header {
+    padding: 5px 15px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 5px;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-main);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.dot.green { background: var(--growth-green); box-shadow: 0 0 5px var(--growth-green); }
+.dot.blue { background: var(--glow-blue); box-shadow: 0 0 5px var(--glow-blue); }
+
+/* View Sections */
+.view-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.view-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .page-title h1 {
