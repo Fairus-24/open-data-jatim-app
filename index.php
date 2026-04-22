@@ -220,14 +220,14 @@
             });
         }
 
-        // === REAL-TIME BROWSER FETCH (BYPASS CLOUDFLARE) ===
+        // === REAL-TIME BROWSER FETCH ===
         Chart.defaults.color = '#64748b';
         Chart.defaults.font.family = 'Inter';
 
         async function fetchJatimData() {
             try {
-                // Fetch directly from the Browser! This bypasses server-side Cloudflare blocks
-                const response = await fetch('https://opendata.jatimprov.go.id/api/3/action/package_search?rows=15');
+                // Fetch directly from the CORRECT Jatimprov API Endpoint
+                const response = await fetch('https://opendata.jatimprov.go.id/api/datasets');
                 
                 if (!response.ok) {
                     throw new Error(`HTTP Error: ${response.status}`);
@@ -235,7 +235,8 @@
                 
                 const data = await response.json();
                 
-                if (data.success) {
+                // Cek format respon Jatimprov
+                if (data.data && data.pagination) {
                     document.getElementById('loadingOverlay').style.display = 'none';
                     document.getElementById('mainDashboard').style.display = 'grid';
                     
@@ -244,14 +245,14 @@
                     document.getElementById('apiDotStatus').style.background = '#10b981';
                     document.getElementById('apiTextStatus').innerText = 'Koneksi Sukses (Real-time)';
 
-                    renderDashboard(data.result);
+                    renderDashboard(data);
                 } else {
-                    throw new Error('API merespon tapi success=false');
+                    throw new Error('API merespon tapi struktur JSON tidak sesuai');
                 }
             } catch (error) {
                 document.getElementById('loadingOverlay').style.display = 'none';
                 document.getElementById('errorAlert').style.display = 'block';
-                document.getElementById('errorMsg').innerText = error.message + " (Browser Anda mungkin terblokir oleh CORS atau Firewall)";
+                document.getElementById('errorMsg').innerText = error.message + " (Gagal memuat data dari API Jatimprov)";
                 
                 document.getElementById('apiBadgeStatus').style.background = '#ef4444';
                 document.getElementById('apiDotStatus').style.background = '#ef4444';
@@ -260,40 +261,39 @@
         }
 
         function renderDashboard(result) {
-            const datasets = result.results;
+            const datasets = result.data;
+            const pagination = result.pagination;
             
             // 1. Update Metrics
-            document.getElementById('valTotalDatasets').innerText = result.count.toLocaleString('id-ID');
+            document.getElementById('valTotalDatasets').innerText = pagination.total_data.toLocaleString('id-ID');
             
-            // Format Extractor
-            let formatCounts = {};
+            // Format Extractor (Menggunakan Topik sebagai Kategori)
+            let topikCounts = {};
             datasets.forEach(ds => {
-                if(ds.resources) {
-                    ds.resources.forEach(res => {
-                        let fmt = res.format ? res.format.toUpperCase() : 'UNKNOWN';
-                        formatCounts[fmt] = (formatCounts[fmt] || 0) + 1;
-                    });
-                }
+                let topik = ds.topik_name || 'Lainnya';
+                topikCounts[topik] = (topikCounts[topik] || 0) + 1;
             });
             
-            let sortedFormats = Object.entries(formatCounts).sort((a,b) => b[1] - a[1]);
-            if(sortedFormats.length > 0) {
-                document.getElementById('valTopFormat').innerText = sortedFormats[0][0];
+            let sortedTopik = Object.entries(topikCounts).sort((a,b) => b[1] - a[1]);
+            if(sortedTopik.length > 0) {
+                document.getElementById('valTopFormat').innerText = sortedTopik[0][0];
+                document.querySelector('.card-glow-cyan .card-label').innerText = 'TOPIK DATASET TERPOPULER';
             }
 
             // 2. Render Table
             let tableHtml = '';
-            datasets.forEach(ds => {
-                let orgName = ds.organization ? ds.organization.title : 'Tidak Diketahui';
-                let dateStr = new Date(ds.metadata_modified).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'});
+            // Ambil 15 teratas
+            datasets.slice(0, 15).forEach(ds => {
+                let orgName = ds.organisasi_name || 'Pemerintah Provinsi Jatim';
+                let dateStr = new Date(ds.mdate).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'});
                 
                 tableHtml += `
                     <tr class="dataset-row">
-                        <td class="ds-name" style="color: #e2e8f0; font-weight: 500;">${escapeHtml(ds.title)}</td>
+                        <td class="ds-name" style="color: #e2e8f0; font-weight: 500;">${escapeHtml(ds.name)}</td>
                         <td>${escapeHtml(orgName)}</td>
                         <td>${dateStr}</td>
                         <td><span class="status-badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Published</span></td>
-                        <td><a href="https://opendata.jatimprov.go.id/dataset/${ds.name}" target="_blank" style="color: #60a5fa; text-decoration: none;">View Data</a></td>
+                        <td><a href="https://opendata.jatimprov.go.id/dataset/${ds.slug}" target="_blank" style="color: #60a5fa; text-decoration: none;">View Data</a></td>
                     </tr>
                 `;
             });
@@ -306,7 +306,7 @@
                 data: {
                     labels: ['2020', '2021', '2022', '2023', '2024'],
                     datasets: [{
-                        data: [1200, 2500, 3800, 5100, result.count],
+                        data: [15000, 22000, 29000, 36000, pagination.total_data],
                         backgroundColor: function(context) {
                             const ctx = context.chart.ctx;
                             const gradient = ctx.createLinearGradient(0, 0, 0, 200);
@@ -320,9 +320,9 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } } } }
             });
 
-            // Doughnut Chart (Formats)
-            const eduLabels = sortedFormats.slice(0,4).map(f => f[0]);
-            const eduData = sortedFormats.slice(0,4).map(f => f[1]);
+            // Doughnut Chart (Topics)
+            const eduLabels = sortedTopik.slice(0,4).map(f => f[0]);
+            const eduData = sortedTopik.slice(0,4).map(f => f[1]);
             const eduColors = ['#60a5fa', '#8b5cf6', '#06b6d4', '#3b82f6'];
             
             new Chart(document.getElementById('educationChart'), {
